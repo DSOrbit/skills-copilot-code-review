@@ -12,14 +12,27 @@
     />
   </head>
   <body>
-    <div class="announcement-banner">
-      📢 Activity registration is open until the end of the month. Don't lose your spot!
-    </div>
+    <section class="announcement-strip" aria-label="School announcements">
+      <div class="announcement-strip-inner">
+        <div class="announcement-strip-title">Announcements</div>
+        <div id="announcement-banner" class="announcement-banner-list">
+          <p class="announcement-empty">Loading announcements...</p>
+        </div>
+      </div>
+    </section>
     <header>
       <h1>Mergington High School</h1>
       <h2>Extracurricular Activities</h2>
       <div id="user-controls">
         <div id="user-status">
+          <button
+            id="manage-announcements-button"
+            class="icon-button hidden"
+            aria-label="Manage announcements"
+          >
+            <span>📣</span>
+            <span>Manage Announcements</span>
+          </button>
           <button id="login-button" class="icon-button">
             <span class="user-icon">👤</span>
             <span>Login</span>
@@ -134,6 +147,60 @@
           <button type="submit">Login</button>
         </form>
         <div id="login-message" class="hidden message"></div>
+      </div>
+    </div>
+
+    <!-- Announcement Management Modal -->
+    <div id="announcements-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-content announcements-modal-content">
+        <span class="close-announcements-modal" aria-label="Close dialog">&times;</span>
+        <h3>Announcement Management</h3>
+
+        <div class="announcements-grid">
+          <section class="announcements-list-panel">
+            <h4>Existing Announcements</h4>
+            <div id="announcements-admin-list" class="announcements-admin-list">
+              <p class="announcement-empty">No announcements found.</p>
+            </div>
+          </section>
+
+          <section class="announcements-form-panel">
+            <h4 id="announcement-form-title">Add Announcement</h4>
+            <form id="announcement-form">
+              <input type="hidden" id="announcement-id" />
+
+              <div class="form-group">
+                <label for="announcement-message">Message:</label>
+                <textarea
+                  id="announcement-message"
+                  rows="4"
+                  required
+                  maxlength="500"
+                  placeholder="Write an announcement for students and parents"
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="announcement-start-date">Start Date (optional):</label>
+                <input type="date" id="announcement-start-date" />
+              </div>
+
+              <div class="form-group">
+                <label for="announcement-expiration-date">Expiration Date:</label>
+                <input type="date" id="announcement-expiration-date" required />
+              </div>
+
+              <div class="announcement-form-actions">
+                <button type="submit" id="announcement-save-button">Save Announcement</button>
+                <button type="button" id="announcement-cancel-edit" class="subtle-button hidden">
+                  Cancel Edit
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <div id="announcements-message" class="hidden message"></div>
       </div>
     </div>
 
